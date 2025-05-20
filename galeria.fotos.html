@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>fotos de capactacion </title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      background-color: #2c3e50;
+      color: white;
+      padding: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    header img {
+      width: 125px;
+      height: auto;
+      margin-right: 20px;
+    }
+
+    nav {
+      display: flex;
+      gap: 15px;
+      margin-right: 20px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    h1 {
+      text-align: center;
+      padding: 20px;
+      color: #333;
+    }
+
+    .carousel-container {
+      position: relative;
+      width: 800px;
+      margin: 30px auto;
+      overflow: hidden;
+      border: 8px solid #111;
+      background-color: white;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .carousel {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel img {
+      width: 800px;
+      height: 500px;
+      flex-shrink: 0;
+      object-fit: cover;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 40px;
+      background-color: rgba(0, 0, 0, 0.4);
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .arrow-left {
+      left: 10px;
+    }
+
+    .arrow-right {
+      right: 10px;
+    }
+
+    footer {
+      background-color: #2c3e50;
+      color: white;
+      text-align: center;
+      padding: 25px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Encabezado -->
+  <header>
+    <img src="fotos/alan3.jpg" alt="Alan Turing">
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="biografia.html">Biografía</a>
+      <a href="logros.html">Logros</a>
+      <a href="galeria.html">Galería</a>
+    </nav>
+  </header>
+
+  <h1>fotos de capacitacion </h1>
+
+  <!-- Carrusel -->
+  <div class="carousel-container">
+    <button class="arrow arrow-left" onclick="moveSlide(-1)">&#10094;</button>
+    <div class="carousel" id="carousel">
+      <img src="fotos/3.png">
+      <img src="fotos/4.png" >
+      <img src="fotos/5.png" >
+      <img src="fotos/6.png" >
+      <img src="fotos/7.png" >
+      <img src="fotos/8.png" >
+      <img src="fotos/9.png" >
+      <img src="fotos/10.png" >
+      <img src="fotos/11.png" >
+      <img src="fotos/19.png" >
+    </div>
+    <button class="arrow arrow-right" onclick="moveSlide(1)">&#10095;</button>
+  </div>
+
+  <!-- Pie de página -->
+  <footer>
+    cuestionario 
+  </footer>
+
+  <!-- JavaScript del carrusel -->
+  <script>
+    const carousel = document.getElementById('carousel');
+    const totalImages = carousel.children.length;
+    const imageWidth = 800;
+    let index = 0;
+
+    function moveSlide(direction) {
+      index += direction;
+      if (index < 0) index = totalImages - 1;
+      if (index >= totalImages) index = 0;
+      carousel.style.transform = `translateX(-${index * imageWidth}px)`;
+    }
+  </script>
+<!-- Área de Formulario -->
+<div style="background: #e0f7fa; padding: 30px;">
+  <h2 style="text-align: center; color: #006064;">cuestionario rapido </h2>
+  <form id="miFormulario" onsubmit="procesarFormulario(event)" style="max-width: 600px; margin: auto;">
+    <label for="nombre">Nombre:</label><br>
+    <input type="text" id="nombre" name="nombre" required style="width: 100%; padding: 10px;"><br><br>
+
+    <label for="correo">Correo electrónico:</label><br>
+    <input type="email" id="correo" name="correo" required style="width: 100%; padding: 10px;"><br><br>
+
+    <label for="comentario">Comentario:</label><br>
+    <textarea id="comentario" name="comentario" rows="4" required style="width: 100%; padding: 10px;"></textarea><br><br>
+
+    <button type="submit" style="padding: 10px 20px; background-color: #00796b; color: white; border: none; cursor: pointer;">
+      Enviar
+    </button>
+  </form>
+
+  <!-- Aquí se mostrará la información ingresada -->
+  <div id="resultado" style="margin-top: 30px; background-color: #ffffff; padding: 20px; border-radius: 10px; display: none;">
+    <h3 style="color: #004d40;">Datos recibidos:</h3>
+    <p><strong>Nombre:</strong> <span id="r-nombre"></span></p>
+    <p><strong>Correo:</strong> <span id="r-correo"></span></p>
+    <p><strong>Comentario:</strong> <span id="r-comentario"></span></p>
+  </div>
+</div>
+
+<script>
+  function procesarFormulario(event) {
+    event.preventDefault(); // Evita que se recargue la página
+
+    const nombre = document.getElementById("nombre").value;
+    const correo = document.getElementById("correo").value;
+    const comentario = document.getElementById("comentario").value;
+
+    // Mostrar los datos capturados
+    document.getElementById("r-nombre").textContent = nombre;
+    document.getElementById("r-correo").textContent = correo;
+    document.getElementById("r-comentario").textContent = comentario;
+
+    document.getElementById("resultado").style.display = "block";
+  }
+</script>
+ <footer>
+        <p>sanchez perez 22190500 621 <img src="fotos/fpie.jpg" width="100" height="50"></p>
+    </footer>
+    <style>
+        footer {
+            text-align: left; /* Alinea el contenido a la izquierda */
+        }
+        footer img {
+            vertical-align: middle; /* Alinea la imagen con el texto */
+            margin-left: 10px; /* Espacio entre la imagen y el texto */
+        }
+    </style>
+</body>
+</html>
